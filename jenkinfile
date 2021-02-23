@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+        jdk 'java'
+    }
+    stages {
+        stage('cloning the git repo') {
+        steps{
+         git credentialsId: '3f0c3b45-4e34-4624-aff4-1385115a81bf', url: 'https://github.com/kotireddyss/jenkin.git'
+          }
+        }
+        stage ('build the package') {
+            steps{
+                sh 'mvn validate'
+                sh 'mvn package'
+            }
+        }
+}
+}
